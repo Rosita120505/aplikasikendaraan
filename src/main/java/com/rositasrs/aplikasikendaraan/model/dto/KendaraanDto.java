@@ -1,4 +1,4 @@
-package com.rositasrs.cobalogin.model.dto;
+package com.rositasrs.aplikasikendaraan.model.dto;
 
 public class KendaraanDto {
 

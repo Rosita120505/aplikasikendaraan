@@ -1,6 +1,6 @@
-package com.rositasrs.cobalogin.repository;
+package com.rositasrs.aplikasikendaraan.repository;
 
-import com.rositasrs.cobalogin.model.entity.KendaraanEntity;
+import com.rositasrs.aplikasikendaraan.model.entity.KendaraanEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

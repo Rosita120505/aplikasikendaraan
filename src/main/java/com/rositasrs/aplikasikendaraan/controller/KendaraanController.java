@@ -1,8 +1,8 @@
-package com.rositasrs.cobalogin.controller;
+package com.rositasrs.aplikasikendaraan.controller;
 
-import com.rositasrs.cobalogin.model.dto.*;
-import com.rositasrs.cobalogin.model.entity.KendaraanEntity;
-import com.rositasrs.cobalogin.repository.KendaraanRepository;
+import com.rositasrs.aplikasikendaraan.model.dto.*;
+import com.rositasrs.aplikasikendaraan.model.entity.KendaraanEntity;
+import com.rositasrs.aplikasikendaraan.repository.KendaraanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+
+@CrossOrigin(origins="http://localhost:1111")
 @RestController
 @RequestMapping("/kendaraan")
 public class KendaraanController {
@@ -101,10 +103,10 @@ public class KendaraanController {
         return list;
     }
 
-    @DeleteMapping("/delete/{noRegistrasi}")
-        public DefaultResponse deleteByNoRegistrasi(@PathVariable String noRegistrasi) {
+    @DeleteMapping("/delete/{kendaraanId}")
+        public DefaultResponse deleteByNoRegistrasi(@PathVariable Integer kendaraanId) {
             DefaultResponse df = new DefaultResponse();
-            Optional<KendaraanEntity> optionalKendaraanEntity = kendaraanRepository.findByNoRegistrasi(noRegistrasi);
+            Optional<KendaraanEntity> optionalKendaraanEntity = kendaraanRepository.findByKendaraanId(kendaraanId);
             if (optionalKendaraanEntity.isPresent()) {
                 kendaraanRepository.delete(optionalKendaraanEntity.get());
                 df.setStatus(Boolean.TRUE);

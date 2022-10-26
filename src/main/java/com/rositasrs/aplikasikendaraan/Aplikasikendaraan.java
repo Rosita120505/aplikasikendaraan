@@ -1,4 +1,4 @@
-package com.rositasrs.cobalogin;
+package com.rositasrs.aplikasikendaraan;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

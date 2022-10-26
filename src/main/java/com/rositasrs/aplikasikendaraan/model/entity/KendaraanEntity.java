@@ -1,9 +1,6 @@
-package com.rositasrs.cobalogin.model.entity;
-
-import org.hibernate.annotations.GenericGenerator;
+package com.rositasrs.aplikasikendaraan.model.entity;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "t_kendaraan")
