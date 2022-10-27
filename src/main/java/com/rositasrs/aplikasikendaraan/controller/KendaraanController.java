@@ -37,19 +37,13 @@ public class KendaraanController {
             return response;
         }
 
-    @GetMapping("/data")
-    public DefaultResponse getDataKendaraan() {
-        DefaultResponse df = new DefaultResponse();
+    @GetMapping("/data") //menampilkan all author
+    public List<KendaraanDto> getListKendaraan() {
         List<KendaraanDto> list = new ArrayList<>();
-        List<KendaraanEntity> lists = kendaraanRepository.findAll();
-        if (lists.size() != 0) {
-            for (KendaraanEntity k : lists) {
-                df.setMessage("Berikut adalah data kendaraan");
-                list.add(convertEntitytoDto(k));
-            }
-            df.setData(list);
+        for (KendaraanEntity a : kendaraanRepository.findAll()) {
+            list.add(convertEntitytoDto(a));
         }
-        return df;
+        return list;
     }
 
 
@@ -103,10 +97,10 @@ public class KendaraanController {
         return list;
     }
 
-    @DeleteMapping("/delete/{kendaraanId}")
-        public DefaultResponse deleteByNoRegistrasi(@PathVariable Integer kendaraanId) {
+    @DeleteMapping("/delete/{noRegistrasi}")
+        public DefaultResponse deleteByNoRegistrasi(@PathVariable String noRegistrasi) {
             DefaultResponse df = new DefaultResponse();
-            Optional<KendaraanEntity> optionalKendaraanEntity = kendaraanRepository.findByKendaraanId(kendaraanId);
+            Optional<KendaraanEntity> optionalKendaraanEntity = kendaraanRepository.findByNoRegistrasi(noRegistrasi);
             if (optionalKendaraanEntity.isPresent()) {
                 kendaraanRepository.delete(optionalKendaraanEntity.get());
                 df.setStatus(Boolean.TRUE);
