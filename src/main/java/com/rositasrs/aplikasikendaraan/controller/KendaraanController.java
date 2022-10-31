@@ -61,11 +61,11 @@ public class KendaraanController {
 
         return dto;
     }
-    @PutMapping("/update/{id}")
-    public DefaultResponse updateById (@PathVariable Integer id, @RequestBody KendaraanDto kendaraanDto){
+    @PutMapping("/update/{noRegistrasi}")
+    public DefaultResponse updateById (@PathVariable String noRegistrasi, @RequestBody KendaraanDto kendaraanDto){
         DefaultResponse defaultResponse = new DefaultResponse();
         try{
-            Optional<KendaraanEntity> optionalKendaraanEntity = kendaraanRepository.findByKendaraanId(id);
+            Optional<KendaraanEntity> optionalKendaraanEntity = kendaraanRepository.findByNoRegistrasi(noRegistrasi);
             KendaraanEntity kendaraan = optionalKendaraanEntity.get();
             if (optionalKendaraanEntity.isPresent()){
                 kendaraan.setMerkKendaraan(kendaraanDto.getMerkKendaraan());
@@ -82,16 +82,21 @@ public class KendaraanController {
                 defaultResponse.setMessage("Succeeded update data");
             }
         }catch(Exception e){
+            Optional<KendaraanEntity> optionalKendaraan1 = kendaraanRepository.findByNoRegistrasi(kendaraanDto.getNoRegistrasi());
             defaultResponse.setStatus(Boolean.FALSE);
-            defaultResponse.setMessage("Failed to update data, Id was not found");
+            if (optionalKendaraan1.isPresent()){
+                defaultResponse.setMessage("Error, Data Sudah Tersedia");
+            } else {
+                defaultResponse.setMessage("Failed to update data, Id was not found");
+            }
         }
         return defaultResponse;
     }
 
-    @GetMapping("/{kendaraanId}")
-    public List<KendaraanDto> getById(@PathVariable Integer kendaraanId) {
+    @GetMapping("/{noRegistrasi}")
+    public List<KendaraanDto> getById(@PathVariable String noRegistrasi) {
         List<KendaraanDto> list = new ArrayList<>();
-        Optional<KendaraanEntity> optionalKendaraan = kendaraanRepository.findByKendaraanId(kendaraanId);
+        Optional<KendaraanEntity> optionalKendaraan = kendaraanRepository.findByNoRegistrasi(noRegistrasi);
         list.add(convertEntitytoDto(optionalKendaraan.get()));
 
         return list;

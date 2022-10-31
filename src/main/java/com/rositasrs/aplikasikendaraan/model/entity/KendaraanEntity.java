@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "t_kendaraan")
 public class KendaraanEntity {
 
-    @Id
+
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_kendaraan")
     @Column(name = "kendaraan_id")
     private Integer kendaraanId;
@@ -18,8 +18,8 @@ public class KendaraanEntity {
     public void setKendaraanId(Integer kendaraanId) {
         this.kendaraanId = kendaraanId;
     }
-
-    @Column(name = "no_registrasi")
+    @Id
+    @Column(name = "no_registrasi", unique = true)
     private String noRegistrasi;
     @Column(name = "nama_pemilik")
     private String namaPemilik;
